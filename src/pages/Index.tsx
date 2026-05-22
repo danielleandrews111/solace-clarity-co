@@ -11,6 +11,9 @@ import heroImg from "@/assets/hero.jpg";
 import readerImg from "@/assets/reader.jpg";
 import textureImg from "@/assets/texture.jpg";
 
+const SQUARE_URL = "https://square.link/u/IrMSDPf0";
+const CONTACT_EMAIL = "mysticmary43@gmail.com";
+
 const painPoints = [
   {
     title: "Mixed Signals",
@@ -47,7 +50,7 @@ const steps = [
 const testimonials = [
   {
     quote:
-      "I finally exhaled. After months of overthinking, Maeva gave me language for what I was feeling — and the courage to trust it.",
+      "I finally exhaled. After months of overthinking, Mary gave me language for what I was feeling — and the courage to trust it.",
     name: "Sophia R.",
     location: "London",
   },
@@ -63,6 +66,42 @@ const testimonials = [
     name: "Noor A.",
     location: "New York",
   },
+  {
+    quote:
+      "Mary saw things about my situation I had never spoken out loud. I cried — not from sadness, but from finally feeling understood.",
+    name: "Isabella M.",
+    location: "Toronto",
+  },
+  {
+    quote:
+      "I was stuck in a loop of waiting and wondering. One call with Mary and I knew exactly what to do next.",
+    name: "Hannah L.",
+    location: "Sydney",
+  },
+  {
+    quote:
+      "Her voice alone is healing. She held space for me in a way no therapist or friend ever has.",
+    name: "Priya S.",
+    location: "Dubai",
+  },
+  {
+    quote:
+      "I booked a Whisper reading on a whim during my lunch break and it changed the entire trajectory of my week. So accurate.",
+    name: "Camille D.",
+    location: "Montréal",
+  },
+  {
+    quote:
+      "Mary is the real deal. Gentle, grounded, and unflinchingly honest. I trust her completely.",
+    name: "Rachel B.",
+    location: "Los Angeles",
+  },
+  {
+    quote:
+      "Six months later and everything she said has unfolded exactly as she described. I'm a client for life.",
+    name: "Elena V.",
+    location: "Madrid",
+  },
 ];
 
 const faqs = [
@@ -75,8 +114,8 @@ const faqs = [
     a: "Always. What is shared in a reading stays between us. You will never be named, recorded, or referenced. This space is yours alone.",
   },
   {
-    q: "How do phone or online readings work?",
-    a: "Energy travels. Whether by phone, video, or written reading, the connection is the same. After booking, you'll receive a private link or a callback at your chosen time.",
+    q: "How do phone or text readings work?",
+    a: "All readings are conducted by phone or text. After booking, you'll receive a confirmation and we'll connect at your chosen time — call or message, whichever feels most comfortable.",
   },
   {
     q: "Will I be judged?",
@@ -95,30 +134,51 @@ const faqs = [
 const offers = [
   {
     name: "Whisper",
-    duration: "20 minutes",
-    price: "$88",
+    duration: "10 minutes",
+    price: "$35",
     desc: "A focused reading on one pressing question — perfect when you need a quick, clear answer.",
     cta: "Book Whisper",
   },
   {
     name: "Clarity",
-    duration: "45 minutes",
-    price: "$168",
-    desc: "Our signature reading. Deep insight on your situation, the person involved, and what's unfolding next.",
+    duration: "20 minutes",
+    price: "$65",
+    desc: "Deeper insight on your situation, the person involved, and what's unfolding next.",
     cta: "Book Clarity",
     featured: true,
   },
   {
     name: "Sanctuary",
-    duration: "75 minutes",
-    price: "$268",
-    desc: "An immersive session for full emotional reset — guidance, healing, and a personal next-steps blueprint.",
+    duration: "30 minutes",
+    price: "$90",
+    desc: "An unhurried session for full emotional reset — guidance and a personal next-steps blueprint.",
     cta: "Book Sanctuary",
+  },
+  {
+    name: "Healing",
+    duration: "60 minutes",
+    price: "$150",
+    desc: "Our most immersive reading. Complete clarity, deep healing, and a path forward held with care.",
+    cta: "Book Healing",
   },
 ];
 
 const Index = () => {
   useReveal();
+
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement)?.value || "";
+    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value || "";
+    const message =
+      (form.elements.namedItem("message") as HTMLTextAreaElement)?.value || "";
+    const subject = encodeURIComponent(`New reading inquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`
+    );
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+  };
 
   return (
     <div id="top" className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -151,7 +211,9 @@ const Index = () => {
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <a
-                href="#booking"
+                href={SQUARE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex justify-center items-center bg-foreground text-primary-foreground rounded-full px-8 py-4 text-sm uppercase tracking-luxe shadow-luxe hover:shadow-glow hover:-translate-y-0.5 transition-silk"
               >
                 Book Your Reading
@@ -169,7 +231,7 @@ const Index = () => {
               <span className="hidden sm:inline">·</span>
               <span>Confidential</span>
               <span className="hidden sm:inline">·</span>
-              <span>15+ Years</span>
+              <span>20+ Years</span>
             </div>
           </div>
         </div>
@@ -208,41 +270,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section id="how" className="relative py-24 md:py-36 bg-secondary/40">
-        <div
-          className="absolute inset-0 opacity-30 mix-blend-multiply"
-          style={{ backgroundImage: `url(${textureImg})`, backgroundSize: "cover" }}
-        />
-        <div className="relative max-w-6xl mx-auto px-6 md:px-10">
-          <div className="max-w-xl reveal">
-            <p className="text-xs uppercase tracking-luxe text-gold mb-5">The Process</p>
-            <h2 className="font-serif text-4xl md:text-5xl leading-tight">
-              A gentle path from confusion to clarity.
-            </h2>
-          </div>
-
-          <div className="mt-20 grid md:grid-cols-3 gap-12 md:gap-8 relative">
-            <div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-            {steps.map((s, i) => (
-              <div
-                key={s.n}
-                className="reveal text-center md:text-left"
-                style={{ transitionDelay: `${i * 120}ms` }}
-              >
-                <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-background border border-gold/40 shadow-soft mb-6">
-                  <span className="font-serif text-xl text-gold">{s.n}</span>
-                </div>
-                <h3 className="font-serif text-2xl mb-3">{s.title}</h3>
-                <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto md:mx-0">
-                  {s.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ABOUT */}
       <section id="about" className="py-24 md:py-36">
         <div className="max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-14 md:gap-20 items-center">
@@ -251,7 +278,7 @@ const Index = () => {
             <div className="relative rounded-[2rem] overflow-hidden shadow-luxe border border-border/60">
               <img
                 src={readerImg}
-                alt="Maeva, intuitive relationship guide"
+                alt="Mary, intuitive relationship guide"
                 className="w-full h-auto"
                 width={1024}
                 height={1024}
@@ -259,7 +286,7 @@ const Index = () => {
               />
             </div>
             <div className="absolute -bottom-6 -right-2 md:-right-6 bg-background rounded-2xl px-6 py-4 shadow-luxe border border-border/60">
-              <p className="font-serif text-3xl text-gold leading-none">15+</p>
+              <p className="font-serif text-3xl text-gold leading-none">20+</p>
               <p className="text-xs uppercase tracking-luxe text-muted-foreground mt-1">
                 Years of Readings
               </p>
@@ -267,13 +294,13 @@ const Index = () => {
           </div>
 
           <div className="reveal">
-            <p className="text-xs uppercase tracking-luxe text-gold mb-5">Meet Maeva</p>
+            <p className="text-xs uppercase tracking-luxe text-gold mb-5">Meet Mary</p>
             <h2 className="font-serif text-4xl md:text-5xl leading-tight">
               An intuitive who listens before she speaks.
             </h2>
             <div className="gold-divider w-20 my-8" />
             <p className="text-muted-foreground leading-relaxed mb-5">
-              For over fifteen years, I've sat with women in their tenderest moments — the
+              For over twenty years, I've sat with women in their tenderest moments — the
               breakup that broke them open, the love that left them guessing, the silence that
               felt louder than any answer.
             </p>
@@ -303,7 +330,7 @@ const Index = () => {
               <figure
                 key={t.name}
                 className="reveal bg-background/70 backdrop-blur-sm rounded-3xl p-10 border border-background/80 shadow-soft hover:shadow-luxe hover:-translate-y-1 transition-silk"
-                style={{ transitionDelay: `${i * 100}ms` }}
+                style={{ transitionDelay: `${(i % 3) * 100}ms` }}
               >
                 <div className="font-serif text-5xl text-gold leading-none mb-4">"</div>
                 <blockquote className="font-serif text-xl md:text-[1.35rem] leading-snug text-foreground/90">
@@ -353,6 +380,41 @@ const Index = () => {
         </div>
       </section>
 
+      {/* HOW IT WORKS — moved closer to booking */}
+      <section id="how" className="relative py-24 md:py-36 bg-secondary/40">
+        <div
+          className="absolute inset-0 opacity-30 mix-blend-multiply"
+          style={{ backgroundImage: `url(${textureImg})`, backgroundSize: "cover" }}
+        />
+        <div className="relative max-w-6xl mx-auto px-6 md:px-10">
+          <div className="max-w-xl reveal">
+            <p className="text-xs uppercase tracking-luxe text-gold mb-5">The Process</p>
+            <h2 className="font-serif text-4xl md:text-5xl leading-tight">
+              A gentle path from confusion to clarity.
+            </h2>
+          </div>
+
+          <div className="mt-20 grid md:grid-cols-3 gap-12 md:gap-8 relative">
+            <div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+            {steps.map((s, i) => (
+              <div
+                key={s.n}
+                className="reveal text-center md:text-left"
+                style={{ transitionDelay: `${i * 120}ms` }}
+              >
+                <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-background border border-gold/40 shadow-soft mb-6">
+                  <span className="font-serif text-xl text-gold">{s.n}</span>
+                </div>
+                <h3 className="font-serif text-2xl mb-3">{s.title}</h3>
+                <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto md:mx-0">
+                  {s.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* BOOKING */}
       <section id="booking" className="relative py-24 md:py-36 bg-gradient-noir text-primary-foreground overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-glow opacity-40 animate-glow-pulse" />
@@ -363,12 +425,12 @@ const Index = () => {
               Step into the quiet you've been longing for.
             </h2>
             <p className="mt-6 text-primary-foreground/70 leading-relaxed">
-              Choose the reading that feels right. Every session is private, unhurried, and
-              held with the care your story deserves.
+              Every reading is conducted by <span className="text-champagne">phone or text</span> —
+              private, unhurried, and held with the care your story deserves.
             </p>
           </div>
 
-          <div className="mt-20 grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {offers.map((o, i) => (
               <div
                 key={o.name}
@@ -393,7 +455,9 @@ const Index = () => {
                   {o.desc}
                 </p>
                 <a
-                  href="#contact"
+                  href={SQUARE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`block text-center rounded-full py-3.5 text-sm uppercase tracking-luxe transition-silk ${
                     o.featured
                       ? "bg-foreground text-primary-foreground hover:opacity-90"
@@ -414,25 +478,22 @@ const Index = () => {
             <p className="text-center text-primary-foreground/60 text-sm mt-2 mb-8">
               Tell me a little about what's on your heart. I personally read every message.
             </p>
-            <form
-              className="space-y-4"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert("Thank you. I'll reach out within 24 hours, gently and privately.");
-              }}
-            >
+            <form className="space-y-4" onSubmit={handleContactSubmit}>
               <input
                 required
+                name="name"
                 placeholder="Your first name"
                 className="w-full bg-transparent border border-primary-foreground/20 rounded-full px-6 py-4 text-sm placeholder:text-primary-foreground/40 focus:outline-none focus:border-champagne transition-colors"
               />
               <input
                 required
+                name="email"
                 type="email"
                 placeholder="Email"
                 className="w-full bg-transparent border border-primary-foreground/20 rounded-full px-6 py-4 text-sm placeholder:text-primary-foreground/40 focus:outline-none focus:border-champagne transition-colors"
               />
               <textarea
+                name="message"
                 rows={4}
                 placeholder="What would you like clarity on? (optional)"
                 className="w-full bg-transparent border border-primary-foreground/20 rounded-3xl px-6 py-4 text-sm placeholder:text-primary-foreground/40 focus:outline-none focus:border-champagne transition-colors resize-none"
@@ -459,19 +520,14 @@ const Index = () => {
               "The answers you're looking for have been waiting quietly inside you all along."
             </p>
             <div className="gold-divider w-20 mx-auto my-8" />
-            <p className="font-serif text-xl">Maeva · Lune</p>
+            <p className="font-serif text-xl">Love Psychic Mary</p>
             <p className="text-xs uppercase tracking-luxe text-muted-foreground mt-2">
               Intuitive Relationship Guidance
             </p>
           </div>
 
-          <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 text-xs uppercase tracking-luxe text-muted-foreground">
-            <div className="flex gap-6">
-              <a href="mailto:hello@maevalune.com" className="hover:text-foreground transition-colors">Email</a>
-              <a href="#" className="hover:text-foreground transition-colors">Instagram</a>
-              <a href="#" className="hover:text-foreground transition-colors">Pinterest</a>
-            </div>
-            <p>© {new Date().getFullYear()} Maeva Lune. All rights reserved.</p>
+          <div className="mt-12 flex items-center justify-center text-xs uppercase tracking-luxe text-muted-foreground">
+            <p>© {new Date().getFullYear()} Love Psychic Mary. All rights reserved.</p>
           </div>
         </div>
       </footer>
